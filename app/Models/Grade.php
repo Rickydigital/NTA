@@ -31,4 +31,9 @@ class Grade extends Model
             'is_pass_grade' => 'boolean',
         ];
     }
+
+    public function courseResults()
+{
+    return $this->hasMany(StudentCourseResult::class);
+}
 }

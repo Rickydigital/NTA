@@ -31,4 +31,9 @@ public function students()
     return $this->hasMany(Student::class);
 }
 
+public function progressionRules()
+{
+    return $this->hasMany(ProgressionRule::class);
+}
+
 }

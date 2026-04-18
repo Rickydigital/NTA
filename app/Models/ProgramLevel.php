@@ -37,4 +37,14 @@ public function placements()
 {
     return $this->hasMany(StudentLevelPlacement::class);
 }
+
+public function progressionRulesFrom()
+{
+    return $this->hasMany(ProgressionRule::class, 'from_program_level_id');
+}
+
+public function progressionRulesTo()
+{
+    return $this->hasMany(ProgressionRule::class, 'to_program_level_id');
+}
 }

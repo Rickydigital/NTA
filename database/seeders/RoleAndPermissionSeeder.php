@@ -20,6 +20,9 @@ class RoleAndPermissionSeeder extends Seeder
 
         $permissions = [
 
+            // Dashboard
+            'dashboard.view',
+
             // Users
             'user.view',
             'user.create',
@@ -53,6 +56,18 @@ class RoleAndPermissionSeeder extends Seeder
             'course.update',
             'course.delete',
 
+            // Academic Years
+            'academic-year.view',
+            'academic-year.create',
+            'academic-year.update',
+            'academic-year.delete',
+
+            // Exam Sessions
+            'exam-session.view',
+            'exam-session.create',
+            'exam-session.update',
+            'exam-session.delete',
+
             // Students
             'student.view',
             'student.create',
@@ -77,24 +92,33 @@ class RoleAndPermissionSeeder extends Seeder
             'gpa-classification.update',
             'gpa-classification.delete',
 
-            // Results Entry
+            // Result Entry
             'result-entry.view',
             'result-entry.create',
             'result-entry.update',
             'result-entry.delete',
             'result-entry.approve',
 
-            // Results Summary
+            // Result Summary
             'result-summary.view',
             'result-summary.generate',
             'result-summary.publish',
 
-            // Progression
+            // Progression Rules
             'progression-rule.view',
             'progression-rule.create',
             'progression-rule.update',
             'progression-rule.delete',
+
+            // Progression Execution
             'progression.execute',
+
+            // Reports
+            'report.view',
+            'report.generate',
+
+            // Student Portal
+            'student-portal.view',
         ];
 
         foreach ($permissions as $permission) {
@@ -110,6 +134,8 @@ class RoleAndPermissionSeeder extends Seeder
         $superAdmin->syncPermissions(Permission::all());
 
         $academicAdmin->syncPermissions([
+            'dashboard.view',
+
             'program.view',
             'program.create',
             'program.update',
@@ -125,6 +151,16 @@ class RoleAndPermissionSeeder extends Seeder
             'course.update',
             'course.delete',
 
+            'academic-year.view',
+            'academic-year.create',
+            'academic-year.update',
+            'academic-year.delete',
+
+            'exam-session.view',
+            'exam-session.create',
+            'exam-session.update',
+            'exam-session.delete',
+
             'grade.view',
             'grade.create',
             'grade.update',
@@ -135,11 +171,23 @@ class RoleAndPermissionSeeder extends Seeder
             'gpa-classification.update',
             'gpa-classification.delete',
 
+            'progression-rule.view',
+            'progression-rule.create',
+            'progression-rule.update',
+            'progression-rule.delete',
+
             'result-summary.view',
             'result-summary.generate',
+
+            'report.view',
+            'report.generate',
         ]);
 
         $examOfficer->syncPermissions([
+            'dashboard.view',
+
+            'exam-session.view',
+
             'result-entry.view',
             'result-entry.create',
             'result-entry.update',
@@ -149,9 +197,16 @@ class RoleAndPermissionSeeder extends Seeder
             'result-summary.view',
             'result-summary.generate',
             'result-summary.publish',
+
+            'progression.execute',
+
+            'report.view',
+            'report.generate',
         ]);
 
         $registrar->syncPermissions([
+            'dashboard.view',
+
             'student.view',
             'student.create',
             'student.update',
@@ -164,6 +219,7 @@ class RoleAndPermissionSeeder extends Seeder
         ]);
 
         $student->syncPermissions([
+            'student-portal.view',
             'result-summary.view',
         ]);
 
@@ -182,5 +238,7 @@ class RoleAndPermissionSeeder extends Seeder
         );
 
         $user->syncRoles([$superAdmin]);
+
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
     }
 }

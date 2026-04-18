@@ -46,9 +46,24 @@ class Student extends Model
     }
 
     public function programEnrollments()
-{
-    return $this->hasMany(StudentProgramEnrollment::class);
-}
+    {
+        return $this->hasMany(StudentProgramEnrollment::class);
+    }
+
+    public function courseResults()
+    {
+        return $this->hasMany(StudentCourseResult::class);
+    }
+
+    public function examResults()
+    {
+        return $this->hasMany(ExamResult::class);
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 
     public function getFullNameAttribute(): string
     {

@@ -12,10 +12,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
 
-    /**
-     * @var list<string>
-     */
     protected $fillable = [
+        'student_id',
         'first_name',
         'second_name',
         'last_name',
@@ -27,9 +25,6 @@ class User extends Authenticatable
         'is_active',
     ];
 
-    /**
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -44,12 +39,17 @@ class User extends Authenticatable
         ];
     }
 
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
+
     public function getFullNameAttribute(): string
     {
-        return trim(
-            $this->first_name . ' ' .
-            ($this->second_name ? $this->second_name . ' ' : '') .
-            $this->last_name
-        );
+        return trim(implode(' ', array_filter([
+            $this->first_name,
+            $this->second_name,
+            $this->last_name,
+        ])));
     }
 }

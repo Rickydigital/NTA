@@ -35,4 +35,14 @@ class StudentExamNumber extends Model
     {
         return $this->belongsTo(AcademicYear::class);
     }
+
+    public function courseResults()
+{
+    return $this->hasMany(StudentCourseResult::class);
+}
+
+public function examResults()
+{
+    return $this->hasMany(ExamResult::class);
+}
 }

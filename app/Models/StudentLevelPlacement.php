@@ -56,4 +56,9 @@ class StudentLevelPlacement extends Model
             'student_id'
         );
     }
+
+    public function examResults()
+{
+    return $this->hasMany(ExamResult::class);
+}
 }

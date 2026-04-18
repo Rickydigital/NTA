@@ -22,4 +22,9 @@ class Course extends Model
     {
         return $this->belongsTo(ProgramLevel::class);
     }
+
+    public function courseResults()
+{
+    return $this->hasMany(StudentCourseResult::class);
+}
 }
